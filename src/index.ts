@@ -28,33 +28,29 @@ export const limitSizePlugin = (
           return;
         }
 
-        const keys = Object.keys(outputs);
-        const fileMax = Math.max(...keys.map((k) => k.length));
-        const sizeMax = Math.max(
-          ...keys.map((k) => `${outputs[k].bytes / 1024}`.length)
-        );
+        const sizes = Object.keys(outputs).map((k) => ({
+          file: k,
+          bytes: Number((outputs[k].bytes / 1024).toFixed(2))
+        }));
 
-        for (const file in outputs) {
-          const isJs = file.match(/.js$/);
-          const size = outputs[file].bytes / 1024;
-          exceeded = !!exceeded ? true : isJs ? size > limit : false;
-          const color = !isJs ? dim : size > limit ? red : green;
+        const fileMax = Math.max(...sizes.map(({ file }) => file.length));
+        const sizeMax = Math.max(...sizes.map(({ bytes }) => `${bytes}`.length));
+
+        for (const size of sizes) {
+          const isJs = size.file.match(/.js$/);
+          exceeded = !!exceeded ? true : isJs ? size.bytes > limit : false;
+          const color = !isJs ? dim : size.bytes > limit ? red : green;
 
           console.log(
             color(
-              `${file.padEnd(fileMax + 4)}${`${size.toFixed(
-                2
-              )}`.padStart(sizeMax)} KB`
+              `${size.file.padEnd(fileMax + 4)}${`${size.bytes}`.padStart(sizeMax)} KB`
             )
           );
         }
 
         if (exceeded) {
           const color = shouldThrow ? red : yellow;
-
-          console.log(
-            color(`\n(!) Some bundles are larger than ${limit} KB\n`)
-          );
+          console.log(color(`\n(!) Some bundles are larger than ${limit} KB\n`));
         }
 
         if (shouldThrow && exceeded) {
