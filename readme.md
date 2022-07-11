@@ -11,7 +11,7 @@ const { limitSizePlugin } = require('esbuild-plugin-limit-size');
 build({
   ...yourOptions,
   plugins: [limitSizePlugin(limit, exit)]
-}).catch(() => process.exit(1));
+})
 ```
 
 
