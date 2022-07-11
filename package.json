@@ -1,0 +1,31 @@
+{
+  "name": "esbuild-plugin-limit-size",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf dist && node build && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonambas/esbuild-plugin-limit-size.git"
+  },
+  "author": "Jon Ambas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonambas/esbuild-plugin-limit-size/issues"
+  },
+  "homepage": "https://github.com/jonambas/esbuild-plugin-limit-size#readme",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "picocolors": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "esbuild": "^0.14.49",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.4"
+  }
+}
