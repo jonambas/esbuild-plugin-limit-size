@@ -10,10 +10,9 @@ const { limitSizePlugin } = require('esbuild-plugin-limit-size');
 
 build({
   ...yourOptions,
-  plugins: [limitSizePlugin(limit, exit)]
-})
+  plugins: [limitSizePlugin(limit, shouldThrow)]
+}).catch(() => process.exit(1));
 ```
-
 
 ### Plugin Args
 
@@ -23,8 +22,8 @@ Type: `number` Default: `500`
 
 Sets the bundle size limit in KBs. This plugin at the moment only checks outputted `.js` files.
 
-##### `exit`
+##### `shouldThrow`
 
 Type: `boolean` Default: `false`
 
-When this is set to `true`, and the provided limit has been exceeded, the plugin will exit with `process.exit(1)`
+When this is set to `true`, and the provided limit has been exceeded, the plugin will throw an error.

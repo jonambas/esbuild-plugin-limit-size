@@ -6,9 +6,9 @@ export const limitSizePlugin = (
    */
   limit = 500,
   /*!
-   * Whether to execute `process.exit(1)` if limit is exceeded
+   * Whether to execute throw an error if limit is exceeded
    */
-  exit = false
+  shouldThrow = false
 ): Plugin => {
   return {
     name: 'limit-size-plugin',
@@ -50,15 +50,15 @@ export const limitSizePlugin = (
         }
 
         if (exceeded) {
-          const color = exit ? red : yellow;
+          const color = shouldThrow ? red : yellow;
 
           console.log(
             color(`\n(!) Some bundles are larger than ${limit} KB\n`)
           );
         }
 
-        if (exit && exceeded) {
-          process.exit(1);
+        if (shouldThrow && exceeded) {
+          throw new Error(`Size limit of ${limit} KB exceeded`);
         }
       });
     }
