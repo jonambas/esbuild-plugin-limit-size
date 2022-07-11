@@ -1,6 +1,8 @@
 # esbuild-plugin-limit-size
 
-A tiny (2kb) bundle size limiter plugin for esbuild.
+A tiny (2kb) bundle size limiter/reporter plugin for esbuild.
+
+![A4 - 1](https://user-images.githubusercontent.com/3903325/178270943-f43350ba-828f-4a0b-a839-8d2bc7d3a12f.png)
 
 ```js
 const { build } = require('esbuild');
@@ -11,6 +13,7 @@ build({
   plugins: [limitSizePlugin(limit, exit)]
 }).catch(() => process.exit(1));
 ```
+
 
 ### Plugin Args
 
