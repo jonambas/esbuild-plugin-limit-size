@@ -31,7 +31,7 @@ export const limitSizePlugin = (
         const keys = Object.keys(outputs);
         const fileMax = Math.max(...keys.map((k) => k.length));
         const sizeMax = Math.max(
-          ...keys.map((k) => `${outputs[k].bytes}`.length)
+          ...keys.map((k) => `${outputs[k].bytes / 1024}`.length)
         );
 
         for (const file in outputs) {
