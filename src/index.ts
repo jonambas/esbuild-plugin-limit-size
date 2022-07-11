@@ -13,7 +13,7 @@ export const limitSizePlugin = (
   return {
     name: 'limit-size-plugin',
     setup(build) {
-      const { dim, green, red, yellow } = require('picocolors');
+      const { dim, cyan, red } = require('picocolors');
 
       if (!build.initialOptions.metafile) {
         build.initialOptions.metafile = true;
@@ -39,22 +39,16 @@ export const limitSizePlugin = (
         for (const size of sizes) {
           const isJs = size.file.match(/.js$/);
           exceeded = !!exceeded ? true : isJs ? size.bytes > limit : false;
-          const color = !isJs ? dim : size.bytes > limit ? red : green;
-
+          const color = !isJs ? dim : size.bytes > limit ? red : cyan;
           console.log(
             color(
-              `${size.file.padEnd(fileMax + 4)}${`${size.bytes}`.padStart(sizeMax)} KB`
+              `${size.file.padEnd(fileMax + 2)}${`${size.bytes}`.padStart(sizeMax)}kb`
             )
           );
         }
 
-        if (exceeded) {
-          const color = shouldThrow ? red : yellow;
-          console.log(color(`\n(!) Some bundles are larger than ${limit} KB\n`));
-        }
-
         if (shouldThrow && exceeded) {
-          throw new Error(`Size limit of ${limit} KB exceeded`);
+          throw new Error(`Bundle size limit of ${limit} KB exceeded`);
         }
       });
     }

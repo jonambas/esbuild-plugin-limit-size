@@ -7,7 +7,6 @@ build({
   entryPoints: ['src/index.ts'],
   bundle: true,
   minify: true,
-  sourcemap: 'linked',
   format: 'cjs',
   platform: 'node',
   outfile: pkg.main
