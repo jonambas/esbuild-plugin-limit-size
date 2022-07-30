@@ -48,7 +48,11 @@ export const limitSizePlugin = (
         }
 
         if (shouldThrow && exceeded) {
-          throw new Error(`Bundle size limit of ${limit} KB exceeded`);
+          throw new Error(`Limit of ${limit}kb exceeded`);
+        }
+
+        if (!exceeded) {
+          console.log(cyan(`\n✓ Under ${limit}kb limit`));
         }
       });
     }
