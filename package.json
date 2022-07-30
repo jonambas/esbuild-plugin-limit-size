@@ -7,7 +7,7 @@
     "build": "rimraf dist && node build && tsc",
     "pretest": "npm run build",
     "test": "jest --watchAll",
-    "test:ci": "jest --ci"
+    "test:ci": "npm run pretest && jest --ci"
   },
   "repository": {
     "type": "git",
